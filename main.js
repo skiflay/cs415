@@ -26,6 +26,12 @@ dbConnection.query(qryStaff, (err, res)=>{
      //console.log(res)
      displyStaff(res);
 })
+const qrylocation = `select * from dreamhomedb.branch where city = 'London' OR city = 'Bristol'`
+dbConnection.query(qrylocation, (err, res)=>{
+    if(err) throw err;
+     //console.log(res)
+     displyLocation(res);
+})
 
 const displyBranch = res=>{
     for(let branch of res){
@@ -38,4 +44,11 @@ const displyStaff = res=>{
                     Sex: ${staff.sex}, Sex: ${staff.sex}, DOB: ${staff.salary}`)
     }
 }
+
+const displyLocation = res=>{
+    for(let loc of res){
+        console.log(`branchNo: ${loc.branchNo}, street: ${loc.street}, city: ${loc.city}, postcode: ${loc.postcode}`)
+    }
+}
+
 dbConnection.end();
